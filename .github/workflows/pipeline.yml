@@ -40,15 +40,14 @@ jobs:
         if: ${{ success() }}
         uses: Ilshidur/action-discord@0.3.2
         with:
-          args: "A new version of Pokedex deployed"
+          args: "✅ A new version of Pokedex deployed"
       - name: Build failed discord webhook
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         if: ${{ failure() }}
         uses: Ilshidur/action-discord@0.3.2
         with:
-          args:
-              "commit ${{github.sha}} by ${{github.actor}} failed to build :("
+          args: "commit ${{github.sha}} by ${{github.actor}} failed to build :("
   tag_release:
     if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
     needs: [simple_deployment_pipeline]
