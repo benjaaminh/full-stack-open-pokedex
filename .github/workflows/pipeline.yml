@@ -41,6 +41,8 @@ jobs:
           severity: info
           details: A new version of Pokedex deployed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        env:
+          DEBUG: webhook-discord:*
       - name: Build failed discord webhook
         uses: rjstone/discord-webhook-notify@v1
         if: ${{ failure() }}
@@ -48,6 +50,8 @@ jobs:
             severity: error
             details: commit ${{github.sha}} by ${{github.actor}} failed to build :(
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        env:
+          DEBUG: webhook-discord:*
   tag_release:
     if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
     needs: [simple_deployment_pipeline]
