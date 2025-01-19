@@ -15,7 +15,6 @@ app.get('/version', (req, res) => {
   res.send('6') // change this string to ensure a new version deployed
 })
 
-app.get('/health', () => {
-  // eslint-disable-next-line no-constant-condition
-  if (true) throw ('error...  ')
+app.get('/health', (req, res) => {
+  res.status(500).send('error') // Return a 500 status code to simulate a failure
 })
