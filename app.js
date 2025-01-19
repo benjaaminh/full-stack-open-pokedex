@@ -16,5 +16,9 @@ app.get('/version', (req, res) => {
 })
 
 app.get('/health', (req, res) => {
-  res.status(500).send('error') // Return a 500 status code to simulate a failure
+  if (req.query.fail) { //if url is like /health?fail=true, then return 500 status code
+    res.status(500).send('error') // Return a 500 status code to simulate a failure
+  } else {
+    res.send('ok')
+  }
 })
